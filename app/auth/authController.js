@@ -14,17 +14,18 @@
         vm.changeMode = () => vm.loginMode = !vm.loginMode
 
         vm.login = () =>{
-           auth.login(vm.user, err => err ? msgs.addError(err) : msgs.addSuccess('Sucesso!'))
+           auth.login(vm.user, err => err ? msgs.addError(err) : $location.path('/'))
         }
 
         vm.signup = () => {
-           auth.signup(vm.user, err => err ? msgs.addError(err) : msgs.addSuccess('Sucesso!'))
+           auth.signup(vm.user, err => err ? msgs.addError(err) : $location.path('/'))
         }
 
         
-        vm.getUser = () => ({ name: 'Usuario MOCK', email: 'ferpiolli@gmail.com'})
+        vm.getUser = () => auth.getUser()
+
         vm.logout = () => {
-            console.log('logout...')
+            auth.logout(() => $location.path('/'))
         }
     }
 }) ()
